@@ -5,6 +5,7 @@ export class ship{
         this.hits = 0;
         this.damaged = false;
         this.sunk = false;
+        this.placed = false;
     }
     isHit(){
         this.hits++;
