@@ -1,0 +1,18 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0px;
+}
+.title{
+    background-color: black;
+    display: flex;
+    min-width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+.title>img{
+    max-width: 100%;
+    height: auto;
+    max-height: 12vh;
+}
