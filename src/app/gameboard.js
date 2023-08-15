@@ -2,6 +2,7 @@ export class gameboard{
     constructor(val){
         this.boardSunk = false;
         this.playerName = val;
+        //generate 2d array
         this.boardArr = new Array(10).fill(0).map(() => new Array(10).fill(0));
         for(let i=0; i<10; i++){
             for(let j=0; j<10; j++){
@@ -9,26 +10,24 @@ export class gameboard{
             }
         }
     }
-    
     placeShip(size,arr){
         let row = Math.floor(Math.random() * 10);
         let col = Math.floor(Math.random() * 10);
         let position = Math.floor(Math.random() * 2);
         //1-horizontal 0-vertical
-
         //check if path is free
         if(position===1){
-            if(col+size>=10) col = col+size-10;
-            for(let k= col, count=0; count<size; k++){
-                if(this.boardArr[row][k].isTaken){
+            if(col+size>=10) return false;
+            for(let h= col, count=0; count<size; h++){
+                if(this.boardArr[row][h].isTaken){
                     return false;
                 }
-                arr.push({row,k});
+                arr.push({row,h});
                 count++;
             }
         }
         if(position===0){
-            if(row+size>=10) row = row+size-10;
+            if(row+size>=10) return false;
             for(let k= row, count=0; count<size; k++){
                 if(this.boardArr[k][col].isTaken){
                     return false;
@@ -39,12 +38,11 @@ export class gameboard{
         }
         return true;
     }
-
     receiveAttack(m,n){
-        if(this.boardArr[m][n].isTaken===true){
+        if(this.boardArr[m][n].marked) return false;
+        else{
             this.boardArr[m][n].marked = true;
             return true;
         }
-        this.boardArr[m][n].marked = true;
     }
 }
